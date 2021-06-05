@@ -1,5 +1,6 @@
 <font face="黑体" size=4>
 # Part1
+
 ## import
 ### package
 A package contains \_\_init\_\_.py,this file is often an empty file. With this file, python will know this is a package.
