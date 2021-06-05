@@ -1,9 +1,9 @@
 <font face="黑体" size=4>
-#Part1
-##import
-###package
+# Part1
+## import
+### package
 A package contains \_\_init\_\_.py,this file is often an empty file. With this file, python will know this is a package.
-###module
+### module
 A module is a file containing Python definitions and statements. The file name is the module name with the suffix .py appended. 
 ***
 eg.if we have a module called fibo.py
@@ -13,7 +13,7 @@ eg.if we have a module called fibo.py
 ***
 相对引用中，"."代表模板所在的当前包，".."代表模板的父包。  
 
-##URL 调度器
+## URL 调度器
 当一个用户请求Django 站点的一个页面，下面是Django 系统决定执行哪个Python 代码使用的算法：
 
 1. Django 确定使用根 URLconf 模块。通常，这是 ROOT\_URLCONF 设置的值，但如果传入 HttpRequest 对象（用户输入的网址）拥有 urlconf 属性，它的值将被用来代替 ROOT\_URLCONF 设置。
@@ -30,21 +30,21 @@ Django 会按顺序遍历每个 URL 模式，然后会在所请求的URL匹配�
 	>用户输入：/articles/2003/03/building-a-django-site/  
 	>传入view模板中函数的关键字参数：request, year=2003, month=3, slug="building-a-django-site"
 
-##include函数
+## include函数
 函数 include() 允许引用其它 URLconfs。每当 Django 遇到 include() 时，它会截断与此项匹配的 URL 的部分，并将剩余的字符串发送到 URLconf 以供进一步处理。
 ***
 host文件  将域名和IP地址一一对应
 
-#Part2
+# Part2
 
-##Database
+## Database
 The DATABASES setting must configure a “default” database; any number of additional databases may also be specified.
 
 默认数据库：sqlite  
 默认数据库中的一些键值：engine:可选用的后端数据库  
 name：数据库的名称（包含绝对路径？）
 
-##INSTALLED_APPS
+## INSTALLED_APPS
 包含项目中启用的所有Django应用。
 
 django.contrib.admin -- 管理员站点。  
@@ -59,15 +59,15 @@ django.contrib.staticfiles -- 管理静态文件的框架。
 ****
 migrate 命令检查 INSTALLED_APPS 设置，为其中的每个应用创建需要的数据表
 
-##模型
-###定义模型
+## 模型
+### 定义模型
 在Django里写一个数据库驱动的 Web 应用的第一步是定义模型，模型是真实数据的简单明确的描述。它包含了储存的数据所必要的字段和行为。
 
 每个模型被表示为 django.db.models.Model 类的子类。每个模型有许多类变量，它们都表示模型里的一个数据库字段。  
 每个字段都是 Field 类的实例，字符字段被表示为 CharField ，日期时间字段被表示为 DateTimeField（？）
 ***
 在我们创建的Choice和Question模型中，我们使用 ForeignKey 定义了一个关系。这将告诉 Django，每个 Choice 对象都关联到一个 Question 对象
-###激活模型
+### 激活模型
 创建模型的代码给了Django很多信息，Django可以创建与 Question 和 Choice 对象进行交互的 Python 数据库 API。  
 
 >python manage.py makemigrations polls
@@ -86,16 +86,16 @@ python类的实例方法、静态方法、类方法
 实例方法，第一个参数必须要默认传实例对象，一般习惯用self。  
 静态方法，参数没有要求。  
 类方法，第一个参数必须要默认传类，一般习惯用cls。  
-###API使用
+### API使用
 为了用 Python 对象展示数据表对象，Django 使用了一套直观的系统：一个模型类代表一张数据表，一个模型类的实例代表数据库表中的一行记录，可以在python交互器中进行数据的插入，修改，删除等操作。  
 ***
 save,get等方法  
 
-#Part3
+# Part3
 模板暂时不用管
-##views
+## views
 每个视图必须要做的只有两件事：返回一个包含被请求页面内容的 HttpResponse 对象，或者抛出一个异常
-###抛出 404 错误
+### 抛出 404 错误
     from django.http import Http404
     from .models import Question
     def detail(request, question_id):
@@ -104,12 +104,12 @@ save,get等方法
         except Question.DoesNotExist:
             raise Http404("Question does not exist")
     return HttpResponse(...)
-###get\_object\_or\_404()
+### get\_object\_or\_404()
 The get_object_or_404() function takes **a Django model** as its first argument and **an arbitrary number of keyword arguments**, which it **passes to the get() function** of the model's manager. It raises Http404 if the **object doesn't exist**.
 >question = get\_object\_or\_404(Question, pk=question_id)
 
-#Part5
-##自动化测试
+# Part5
+## 自动化测试
 创建在应用的tests.py中 
  
 	import datetime	
